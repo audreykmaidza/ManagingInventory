@@ -1,0 +1,10 @@
+<body>
+  <div>
+
+    <app-nav-menu *ngIf="storageService.isAuthenticated()"></app-nav-menu>
+    <div class="container">
+    <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</body>

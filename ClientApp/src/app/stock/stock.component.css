@@ -1,0 +1,8 @@
+.d-inline-block{
+    margin: 10px;
+}
+
+.container {    
+    overflow-x: auto;
+    white-space: nowrap;
+}

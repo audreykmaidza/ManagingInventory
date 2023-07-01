@@ -1,0 +1,128 @@
+<div class="container" >
+    <h1>Movimientos de mercancías</h1>
+    <hr>
+    <div class="container">
+      <button mat-button class="bg-success"  (click)="create()">
+          <mat-icon>add_box</mat-icon> 
+          Crear movimiento                    
+      </button>
+      <br><br>
+        <table class="table table-bordered table-striped"
+            >
+            <thead>
+            <tr>          
+              <th scope="col">Tipo de movimiento</th>
+              <th scope="col">Producto</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Almacén de origen</th>
+              <th scope="col">Almacén de destino</th>
+              <th scope="col">Usuario</th>
+              <th scope="col">Fecha</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of goodsmovements; ">
+              
+              <td>{{ item.movementType }}</td>
+              <td>{{ item.product  }}  </td>
+              <td>{{ item.quantity | number }}</td>
+              <td>{{ item.storageLocationFrom   }}</td>
+              <td>{{ item.storageLocationTo  }}</td>
+              <td>{{ item.user  }}</td>
+              <td>{{ item.date | date}}</td>
+              
+            </tr>
+            </tbody>
+          </table>
+
+          <ng-template #template>
+            <div class="modal-body text-center ">
+              <p>Producto se eliminará</p>
+              <button style="margin: 5px;" type="button" class="btn btn-warning" (click)="confirm()" >Continuar</button>
+              <button style="margin: 5px;" type="button" class="btn btn-default" (click)="decline()" >Cancelar</button>
+            </div>
+          </ng-template>
+
+          <ng-template #templateEdit>
+            <div class="container" style="margin-top: 3%;"> 
+              <div class="card mx-auto" style="max-width: 50rem;">  
+                <div class="card-header">
+                  <h1 style="text-align: center;">Editar producto</h1>
+                </div>  
+                <div class="card-body ">
+                  <form #editForm="ngForm" (ngSubmit)="edit(editForm)" >
+                    <div class="form-group">
+                      <label for="description">Descripción</label>
+                      <input
+                        type="text"
+                        id="description"
+                        class="form-control"
+                        [ngModel]= "itemToDelete.description"
+                        name="description"
+                        required              
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="category">Categoría</label>
+                      <input
+                        type="text"
+                        id="category"
+                        class="form-control"
+                        [ngModel]= "itemToDelete.category"
+                        name="category"
+                        required              
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="unitOfMeasurement">Unidad de medida</label>
+                      <input
+                        type="text"
+                        id="unitOfMeasurement"
+                        class="form-control"
+                        [ngModel]= "itemToDelete.unitOfMeasurement"
+                        name="unitOfMeasurement"
+                        required
+                        
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="purchasePrice">Precio de compra</label>
+                      <input
+                        type="number"
+                        id="purchasePrice"
+                        class="form-control"
+                        [ngModel]= "itemToDelete.purchasePrice"
+                        name="purchasePrice"
+                        required
+                        
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="salePrice">Precio de venta</label>
+                      <input
+                        type="number"
+                        id="salePrice"
+                        class="form-control"
+                        [ngModel]= "itemToDelete.salePrice"
+                        name="salePrice"
+                        required
+                        
+                      />
+                    </div>
+                    <div>
+                      <button
+                        class="btn btn-primary"
+                        type="submit"
+                        [disabled]="!editForm.valid"
+                      >
+                        Editar
+                      </button>     
+                    </div>
+                  </form>
+                </div>   
+                
+              </div>
+            </div>          
+          </ng-template>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="container" >
+    <h1>Stock</h1>
+    <hr>
+    <div class="container">  
+        <form #authForm="ngForm" (ngSubmit)="GetStockByProductAndStorageLocation(authForm)">
+            <div *ngIf="authForm.touched">
+                <div *ngIf="!authForm.valid" class="alert alert-danger" role="alert">
+                  Seleccionar productos y almacenes
+                </div>               
+              </div>            
+            <div class="d-inline-block">
+                <div class="form-group ">
+                    <label for="idproduct">Producto</label>
+                    <select class="form-control" id="idproduct" name="idproduct" required ngModel type="number">  
+                        <option   [value]="0">Todos los productos</option>             
+                        <option  *ngFor="let item of Products" [value]="item.idproduct">{{item.description}}</option>
+                    </select>
+                </div> 
+            </div>           
+            <div class="d-inline-block">
+                <div class="form-group ">
+                    <label for="idstorageLocation">Almacén</label>
+                    <select class="form-control" id="idstorageLocation" name="idstorageLocation" required ngModel >  
+                        <option   [value]="0">Todos los almacenes</option>              
+                        <option type="number" *ngFor="let item of storagelocations" [value]="item.idstorageLocation">{{item.description}}</option>
+                    </select>
+                </div>             
+            </div>
+            <div class="d-inline-block">
+              <button
+                class="btn btn-primary"
+                type="submit"
+                [disabled]="!authForm.valid"
+              >
+                Buscar
+              </button>     
+            </div>          
+          </form> 
+        <table class="table table-bordered table-striped"
+            >
+            <thead>
+            <tr>          
+              <th scope="col">Almacén</th>
+              <th scope="col">Producto</th>
+              <th scope="col">Cantidad</th> 
+              <th scope="col">Unidad de medida</th>           
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of stocks; ">              
+              <td>{{ item.storageLocation }}</td>
+              <td>{{ item.product  }}</td>
+              <td>{{ item.quantity | number }}</td>
+              <td>{{ item.unitOfMeasurement  }}</td>           
+            </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+
